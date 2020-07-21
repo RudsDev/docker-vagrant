@@ -1,0 +1,18 @@
+
+FROM ubuntu:18.04
+
+ADD ./sync_files/docker/tomcat/tomcat.sh ./tomcat.sh
+
+RUN sleep 5 && /tomcat.sh
+
+ADD /sync_files/docker/tomcat/tomcat.service /etc/systemd/system/
+ADD /sync_files/docker/tomcat/tomcat-users.xml /opt/tomcat/conf 
+ADD /sync_files/docker/tomcat/server.xml /opt/tomcat/conf/server.xml
+ADD /sync_files/docker/tomcat/context.xml /opt/tomcat/webapps/manager/META-INF/context.xml
+
+LABEL version="0.2"
+LABEL mantainer="ruds.devel@gmail.com"
+
+EXPOSE 8282
+
+ENTRYPOINT ["/opt/tomcat/bin/catalina.sh"]
