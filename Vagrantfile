@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   # https://docs.vagrantup.com.
 
   # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://vagrantcloud.com/search.
+  # boxes at https://vagrantcloud.com/search. 
   config.vm.box = "relativkreativ/ubuntu-18-minimal"
 
   # Disable automatic box update checking. If you disable this, then
@@ -24,6 +24,9 @@ Vagrant.configure("2") do |config|
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # NOTE: This will enable public access to the opened port
     config.vm.network "forwarded_port", guest: 8282, host: 8282
+    config.vm.network "forwarded_port", guest: 5432, host: 5432
+    config.vm.network "forwarded_port", guest: 4000, host: 4000
+  
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
@@ -54,9 +57,9 @@ Vagrant.configure("2") do |config|
     config.vm.provider "virtualbox" do |vb|
       # Display the VirtualBox GUI when booting the machine
       vb.gui = false
-  
+      
       # Customize the amount of memory on the VM:
-      vb.memory = "512"
+      vb.memory = "1024"
     end
   #
   # View the documentation for the provider you are using for more
